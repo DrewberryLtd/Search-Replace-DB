@@ -192,6 +192,18 @@ class icit_srdb {
      */
     public $page_size = 50000;
 
+    /**
+     * How many parallel instances will be spawned if any.
+     * @var int
+     */
+    public $parallel_instances = false;
+
+    /**
+     * How many rows to select at a time when replacing
+     * @var int
+     */
+    public $instance_number = false;
+
 
     /**
      * Searches for WP or Drupal context
@@ -1001,6 +1013,12 @@ class icit_srdb {
                 $pages     = ceil( $row_count / $page_size );
 
                 for ( $page = 0; $page < $pages; $page ++ ) {
+                    if ( $this->parallel_instances > 0 && $this->instance_number >= 0 && $this->instance_number < $this->parallel_instances ) {
+                        if ( $this->parallel_instances !== 1 
+                            && $page % $this->parallel_instances !== $this->instance_number - 1 ) {
+                            continue;
+                        }
+                    }
 
                     $start = $page * $page_size;
 

@@ -60,6 +60,16 @@ $opts = array(
     ],
     [ 'l:', 'page-size:', 'How rows to fetch at a time from a table.', ],
     [
+        '',
+        'parallel-instances:',
+        'How many parallel instances will be spawned if any.',
+    ],
+    [
+        '',
+        'instance-number:',
+        'If parallel-instances is set, this is the number of the parallel instance; from 1 to -parallel-instances.',
+    ],
+    [
         'z',
         'dry-run',
         'Prevents any updates happening so you can preview the number of changes to be made',
@@ -185,11 +195,11 @@ if ( $missing_arg ) {
 
 // new args array
 $args = array(
-    'verbose'       => true,
-    'ssl_check'     => true,
-    'dry_run'       => false,
-    'debug'         => false,
-    'allow_old_php' => false
+    'verbose'            => true,
+    'ssl_check'          => true,
+    'dry_run'            => false,
+    'debug'              => false,
+    'allow_old_php'      => false,
 );
 
 if ( isset( $options['allow-old-php'] ) ) {
