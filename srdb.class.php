@@ -1013,7 +1013,7 @@ class icit_srdb {
                 $pages     = ceil( $row_count / $page_size );
 
                 for ( $page = 0; $page < $pages; $page ++ ) {
-                    if ( $this->parallel_instances > 0 && $this->instance_number >= 0 && $this->instance_number < $this->parallel_instances ) {
+                    if ( $this->parallel_instances > 0 && $this->instance_number >= 0 && $this->instance_number <= $this->parallel_instances ) {
                         if ( $this->parallel_instances !== 1 
                             && $page % $this->parallel_instances !== $this->instance_number - 1 ) {
                             continue;
